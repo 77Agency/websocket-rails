@@ -148,7 +148,7 @@ module WebsocketRails
     def remove_server(token)
       ruby_redis.srem "websocket_rails.active_servers", token
       info "Server Removed: #{token}"
-      EM.stop
+      EM.stop if EM.reactor_running?
     end
 
     def register_user(connection)
